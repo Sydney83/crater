@@ -2,18 +2,12 @@ version: '3'
 
 services:
   app:
-    build:
-      args:
-        user: crater-user
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: crater-php
+    image: bahmni/crater-app
     restart: unless-stopped
     working_dir: /var/www/
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
+    #volumes:
+      # - ./:/var/www
+      # - ./docker-compose/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:rw,delegated
     networks:
       - crater
 
