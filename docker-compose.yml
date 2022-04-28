@@ -30,13 +30,13 @@ services:
       - crater
 
   nginx:
-    image: nginx:1.17-alpine
+    image: bahmni/crater-frontend
     restart: unless-stopped
     ports:
       - 80:80
-    volumes:
-      - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    #volumes:
+    #   - ./public:/var/www/public
+    #   - ./docker-compose/nginx:/etc/nginx/conf.d/
     networks:
       - crater
 
