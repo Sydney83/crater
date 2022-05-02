@@ -146,6 +146,7 @@
 </head>
 
 <body>
+
     <div class="sub-container">
         <table class="report-header">
             <tr>
@@ -194,6 +195,45 @@
         </table>
     </div>
 
+                <table class="items-table" table-layout = "fixed" cellspacing = "1" cellpadding = "2" width="25%" >
+
+                    @foreach ($names as $name)
+
+                    <p class="sales-items-name"> {{$name->name}} ({{$name->total_invoices}})  </p>
+                    <div class="items-table-container">
+                        <table class="items-table">
+                                        @foreach($name_invoices as $key=>$value)
+                                            @foreach($value as $v)
+                                                @if ($v["name"] == $name->name)
+                                                <tr>
+                                                    <td>
+                                                        <p class="item-title">
+                                                            {{$v["invoice_id"]}} ({{$v["date"]}}) ({{$v["quantity"]}})
+                                                        </p>
+                                                    <td>
+                                                    <td>
+                                                        <p class="item-sales-amount">
+                                                            {!! format_money_pdf($v['base_total']) !!}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                        </table>
+                    </div>
+
+                    <table class="sales-total-indicator-table">
+                        <tr>
+                            <td class="sales-total-cell">
+                                <p class="sales-total-amount">
+                                    {!! format_money_pdf($name->total_amount) !!}
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                @endforeach
+            </div>
 
     <table class="report-footer">
         <tr>

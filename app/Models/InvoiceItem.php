@@ -48,7 +48,7 @@ class InvoiceItem extends Model
 
     public function scopeWhereCompany($query, $company_id)
     {
-        $query->where('company_id', $company_id);
+        $query->where('invoice_items.company_id', $company_id);
     }
 
     public function scopeInvoicesBetween($query, $start, $end)
@@ -75,7 +75,16 @@ class InvoiceItem extends Model
     public function scopeItemAttributes($query)
     {
         $query->select(
-            DB::raw('sum(quantity) as total_quantity, sum(base_total) as total_amount, invoice_items.name')
-        )->groupBy('invoice_items.name');
+            DB::raw('invoice_items.quantity as quantity, invoice_items.base_total as base_total, invoice_items.name as name, invoices.invoice_number as invoice_id, invoice_items.unit_name as unit, invoices.invoice_date as date')
+        )
+            ->join("invoices", "invoices.id", "=", "invoice_items.invoice_id");
+    }
+
+    public function scopeGetTotalInvoices($query)
+    {
+        $query->select(
+            DB::raw('count(invoice_id) as total_invoices, sum(base_total) as total_amount, invoice_items.name as name')
+        )
+            ->groupBy('invoice_items.name');
     }
 }

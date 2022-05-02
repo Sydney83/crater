@@ -33,11 +33,31 @@ class ItemSalesReportController extends Controller
         $items = InvoiceItem::whereCompany($company->id)
             ->applyInvoiceFilters($request->only(['from_date', 'to_date']))
             ->itemAttributes()
+            ->orderBy('name')
+            ->orderBy('invoice_id')
             ->get();
 
+        $names = InvoiceItem::whereCompany($company->id)
+            ->applyInvoiceFilters($request->only(['from_date', 'to_date']))
+            ->GetTotalInvoices()
+            ->orderBy('name')
+            ->get();
+
+        $name_invoices = [];
+
+        foreach ($names as $name) {
+            $invoice_obj = $items
+           ->where('name', '=', $name->name)
+           ->sortBy('invoice_id');
+
+            $invoices = json_decode($invoice_obj, true);
+            array_push($name_invoices, $invoices);
+        }
+
         $totalAmount = 0;
+
         foreach ($items as $item) {
-            $totalAmount += $item->total_amount;
+            $totalAmount += $item->base_total;
         }
 
         $dateFormat = CompanySetting::getSetting('carbon_date_format', $company->id);
@@ -55,17 +75,19 @@ class ItemSalesReportController extends Controller
             'footer_bg_color',
             'date_text_color',
         ];
+
         $colorSettings = CompanySetting::whereIn('option', $colors)
             ->whereCompany($company->id)
             ->get();
 
         view()->share([
-            'items' => $items,
             'colorSettings' => $colorSettings,
             'totalAmount' => $totalAmount,
             'company' => $company,
             'from_date' => $from_date,
             'to_date' => $to_date,
+            'name_invoices' => $name_invoices,
+            'names' => $names,
         ]);
         $pdf = PDF::loadView('app.pdf.reports.sales-items');
 
