@@ -16,3 +16,5 @@ Homestead.yaml
 .gitkeep
 /public/docs
 /.scribe
+
+__pycache__
