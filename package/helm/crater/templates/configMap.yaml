@@ -10,6 +10,7 @@ data:
   SANCTUM_STATEFUL_DOMAINS: "{{ .Values.config.SANCTUM_STATEFUL_DOMAINS }}"
   SESSION_DOMAIN: "{{ .Values.config.SESSION_DOMAIN }}"
   AUTO_INSTALL: "{{ .Values.config.AUTO_INSTALL }}"
+  CUSTOM_SETUP: "{{ .Values.config.CUSTOM_SETUP }}"
   ADMIN_NAME: "{{ .Values.config.ADMIN_NAME }}"
   COMPANY_NAME: "{{ .Values.config.COMPANY_NAME }}"
   COMPANY_SLUG: "{{ .Values.config.COMPANY_SLUG }}"

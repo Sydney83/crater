@@ -31,6 +31,7 @@ config:
   SANCTUM_STATEFUL_DOMAINS: crater.test
   SESSION_DOMAIN: crater.test
   AUTO_INSTALL: "false"
+  CUSTOM_SETUP: "false"
   ADMIN_NAME: Jane Doe
   COMPANY_NAME: xyz
   COMPANY_SLUG: xyz
