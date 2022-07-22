@@ -1,0 +1,97 @@
+[
+    {
+        "ability": "view-customer",
+        "model": "Crater\\Models\\Customer",
+        "ability_id": 1
+    },
+    {
+        "ability": "create-customer",
+        "model": "Crater\\Models\\Customer",
+        "ability_id": 2
+    },
+    {
+        "ability": "edit-customer",
+        "model": "Crater\\Models\\Customer",
+        "ability_id": 3
+    },
+    {
+        "ability": "view-item",
+        "model": "Crater\\Models\\Item",
+        "ability_id": 5
+    },
+    {
+        "ability": "create-item",
+        "model": "Crater\\Models\\Item",
+        "ability_id": 6
+    },
+    {
+        "ability": "edit-item",
+        "model": "Crater\\Models\\Item",
+        "ability_id": 7
+    },
+    {
+        "ability": "view-estimate",
+        "model": "Crater\\Models\\Estimate",
+        "ability_id": 13
+    },
+    {
+        "ability": "create-estimate",
+        "model": "Crater\\Models\\Estimate",
+        "ability_id": 14
+    },
+    {
+        "ability": "edit-estimate",
+        "model": "Crater\\Models\\Estimate",
+        "ability_id": 15
+    },
+    {
+        "ability": "send-estimate",
+        "model": "Crater\\Models\\Estimate",
+        "ability_id": 17
+    },
+    {
+        "ability": "view-invoice",
+        "model": "Crater\\Models\\Invoice",
+        "ability_id": 18
+    },
+    {
+        "ability": "create-invoice",
+        "model": "Crater\\Models\\Invoice",
+        "ability_id": 19
+    },
+    {
+        "ability": "edit-invoice",
+        "model": "Crater\\Models\\Invoice",
+        "ability_id": 20
+    },
+    {
+        "ability": "send-invoice",
+        "model": "Crater\\Models\\Invoice",
+        "ability_id": 22
+    },
+    {
+        "ability": "view-payment",
+        "model": "Crater\\Models\\Payment",
+        "ability_id": 27
+    },
+    {
+        "ability": "create-payment",
+        "model": "Crater\\Models\\Payment",
+        "ability_id": 28
+    },
+    {
+        "ability": "edit-payment",
+        "model": "Crater\\Models\\Payment",
+        "ability_id": 29
+    },
+    {
+        "ability": "delete-payment",
+        "model": "Crater\\Models\\Payment",
+        "ability_id": 30
+    },
+    {
+        "ability": "send-payment",
+        "model": "Crater\\Models\\Payment",
+        "ability_id": 31
+    }
+]
