@@ -17,10 +17,4 @@ then
     php artisan db:seed --class=DemoSeeder --force
 fi
 
-if [ ${CUSTOM_SETUP} == "true" ]
-then
-    php artisan db:seed --class=RolesTableSeeder --force
-    php artisan db:seed --class=CustomFieldsTableSeeder --force
-fi
-
 php-fpm
