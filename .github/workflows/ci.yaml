@@ -10,6 +10,7 @@ on:
   pull_request:
     branches:
       - bahmni-master
+      - BAH-2560
 env:
   CRATER_VERSION: 1.0.0
 jobs:
@@ -71,7 +72,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Login to DockerHub
-      uses: docker/login-action@v1 
+      uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_TOKEN }}
