@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.1.13-fpm-alpine
 
 ENV user=crater-user
 ENV uid=1000
