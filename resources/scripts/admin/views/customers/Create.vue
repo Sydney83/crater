@@ -65,6 +65,7 @@
                 v-model.trim="customerStore.currentCustomer.contact_name"
                 :content-loading="isFetchingInitialData"
                 type="text"
+                :disabled=true
               />
             </BaseInputGroup>
 
