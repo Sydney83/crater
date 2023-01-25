@@ -177,7 +177,7 @@
     "name": "Name",
     "mail": "Mail | Mails",
     "statement": "Statement",
-    "display_name": "Display Name",
+    "display_name": "Name",
     "primary_contact_name": "Primary Contact Name",
     "contact_name": "Contact Name",
     "amount_due": "Amount Due",

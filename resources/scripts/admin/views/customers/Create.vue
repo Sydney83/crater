@@ -31,7 +31,8 @@
 
       <BaseCard class="mt-5">
         <!-- Basic Info -->
-        <div class="grid grid-cols-5 gap-4 mb-8">
+        <h1>Hello</h1>
+        <!-- <div class="grid grid-cols-5 gap-4 mb-8"> -->
           <h6 class="col-span-5 text-lg font-semibold text-left lg:col-span-1">
             {{ $t('customers.basic_info') }}
           </h6>
@@ -58,6 +59,10 @@
             </BaseInputGroup>
 
             <BaseInputGroup
+              :error="
+                  v$.currentCustomer.name.$error &&
+                  v$.currentCustomer.name.$errors[0].$message
+                "
               :label="$t('customers.primary_contact_name')"
               :content-loading="isFetchingInitialData"
             >
@@ -159,7 +164,7 @@
               />
             </BaseInputGroup>
           </BaseInputGrid>
-        </div>
+        <!-- </div> -->
 
         <BaseDivider class="mb-5 md:mb-8" />
 
@@ -594,6 +599,7 @@ import {
   email,
   sameAs,
   requiredIf,
+  alpha
 } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
 import { useCustomerStore } from '@/scripts/admin/stores/customer'
@@ -639,6 +645,7 @@ const rules = computed(() => {
           t('validation.name_min_length', { count: 3 }),
           minLength(3)
         ),
+        alpha: helpers.withMessage(t('validation.characters_only'), alpha)
       },
       prefix: {
         minLength: helpers.withMessage(
