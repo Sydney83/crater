@@ -15,6 +15,7 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('made_at');
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();

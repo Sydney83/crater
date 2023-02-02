@@ -29,6 +29,9 @@ class CustomerRequest extends FormRequest
         $rules = [
             'name' => [
                 'required',
+            ]
+            ,'made_at' => [
+                'nullable',
             ],
             'email' => [
                 'email',
@@ -132,6 +135,7 @@ class CustomerRequest extends FormRequest
         return collect($this->validated())
             ->only([
                 'name',
+                'made_at',
                 'email',
                 'currency_id',
                 'password',
