@@ -127,7 +127,6 @@ import {
   maxLength,
   minValue,
   helpers,
-  alpha,
 } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
 import { useModalStore } from '@/scripts/stores/modal'
@@ -146,6 +145,7 @@ const companyStore = useCompanyStore()
 const taxTypeStore = useTaxTypeStore()
 const estimateStore = useEstimateStore()
 const notificationStore = useNotificationStore()
+const alpha = helpers.regex(/^[a-z A-Z]*$/)
 
 const { t } = useI18n()
 const isLoading = ref(false)
@@ -191,6 +191,7 @@ const rules = {
       t('validation.name_min_length', { count: 3 }),
       minLength(3)
     ),
+    alpha: helpers.withMessage(t('validation.characters_only'), alpha)
   },
 
   description: {

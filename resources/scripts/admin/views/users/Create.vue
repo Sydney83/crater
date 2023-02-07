@@ -129,6 +129,10 @@
             </BaseInputGroup>
 
             <BaseInputGroup
+              :error="
+                  v$.userData.phone.$error &&
+                  v$.userData.phone.$errors[0].$message
+                "
               :content-loading="isFetchingInitialData"
               :label="$t('users.phone')"
             >
@@ -171,6 +175,7 @@ import {
   email,
   requiredIf,
   helpers,
+  numeric,
 } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
 import { ValidateEach } from '@vuelidate/components'
@@ -183,6 +188,7 @@ const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const companyStore = useCompanyStore()
+const alpha = helpers.regex(/^[a-z A-Z]*$/)
 
 let isSaving = ref(false)
 let isFetchingInitialData = ref(false)
@@ -204,6 +210,7 @@ const rules = computed(() => {
           t('validation.name_min_length', { count: 3 }),
           minLength(3)
         ),
+        alpha: helpers.withMessage(t('validation.characters_only'), alpha)
       },
       email: {
         required: helpers.withMessage(t('validation.required'), required),
@@ -222,6 +229,9 @@ const rules = computed(() => {
       companies: {
         required: helpers.withMessage(t('validation.required'), required),
       },
+      phone: {
+        numeric: helpers.withMessage(t('validation.numbers_only'), numeric),
+      }
     },
   }
 })

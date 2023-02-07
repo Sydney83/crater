@@ -60,6 +60,10 @@
             <BaseInputGroup
               :label="$t('customers.primary_contact_name')"
               :content-loading="isFetchingInitialData"
+              :error="
+                v$.currentCustomer.contact_name.$error &&
+                v$.currentCustomer.contact_name.$errors[0].$message
+              "
             >
               <BaseInput
                 v-model.trim="customerStore.currentCustomer.contact_name"
@@ -89,6 +93,10 @@
 
             <BaseInputGroup
               :label="$t('customers.phone')"
+              :error="
+                v$.currentCustomer.phone.$error &&
+                v$.currentCustomer.phone.$errors[0].$message
+              "
               :content-loading="isFetchingInitialData"
             >
               <BaseInput
@@ -275,6 +283,10 @@
             <BaseInputGroup
               :label="$t('customers.name')"
               :content-loading="isFetchingInitialData"
+              :error="
+                v$.currentCustomer.billing.name.$error &&
+                v$.currentCustomer.billing.name.$errors[0].$message
+              "
             >
               <BaseInput
                 v-model.trim="customerStore.currentCustomer.billing.name"
@@ -306,6 +318,10 @@
             <BaseInputGroup
               :label="$t('customers.state')"
               :content-loading="isFetchingInitialData"
+              :error="
+                v$.currentCustomer.billing.state.$error &&
+                v$.currentCustomer.billing.state.$errors[0].$message
+              "
             >
               <BaseInput
                 v-model="customerStore.currentCustomer.billing.state"
@@ -318,6 +334,10 @@
             <BaseInputGroup
               :content-loading="isFetchingInitialData"
               :label="$t('customers.city')"
+              :error="
+                v$.currentCustomer.billing.city.$error &&
+                v$.currentCustomer.billing.city.$errors[0].$message
+              "
             >
               <BaseInput
                 v-model="customerStore.currentCustomer.billing.city"
@@ -369,6 +389,10 @@
               <BaseInputGroup
                 :content-loading="isFetchingInitialData"
                 :label="$t('customers.phone')"
+                :error="
+                v$.currentCustomer.billing.phone.$error &&
+                v$.currentCustomer.billing.phone.$errors[0].$message
+              "
                 class="text-left"
               >
                 <BaseInput
@@ -382,6 +406,10 @@
               <BaseInputGroup
                 :label="$t('customers.zip_code')"
                 :content-loading="isFetchingInitialData"
+                :error="
+                v$.currentCustomer.billing.zip.$error &&
+                v$.currentCustomer.billing.zip.$errors[0].$message
+              "
                 class="mt-2 text-left"
               >
                 <BaseInput
@@ -433,6 +461,10 @@
             <BaseInputGroup
               :content-loading="isFetchingInitialData"
               :label="$t('customers.name')"
+              :error="
+                v$.currentCustomer.shipping.name.$error &&
+                v$.currentCustomer.shipping.name.$errors[0].$message
+              "
             >
               <BaseInput
                 v-model.trim="customerStore.currentCustomer.shipping.name"
@@ -463,6 +495,10 @@
             <BaseInputGroup
               :label="$t('customers.state')"
               :content-loading="isFetchingInitialData"
+              :error="
+                v$.currentCustomer.shipping.state.$error &&
+                v$.currentCustomer.shipping.state.$errors[0].$message
+              "
             >
               <BaseInput
                 v-model="customerStore.currentCustomer.shipping.state"
@@ -475,6 +511,10 @@
             <BaseInputGroup
               :content-loading="isFetchingInitialData"
               :label="$t('customers.city')"
+              :error="
+                v$.currentCustomer.shipping.city.$error &&
+                v$.currentCustomer.shipping.city.$errors[0].$message
+              "
             >
               <BaseInput
                 v-model="customerStore.currentCustomer.shipping.city"
@@ -525,6 +565,10 @@
               <BaseInputGroup
                 :content-loading="isFetchingInitialData"
                 :label="$t('customers.phone')"
+                :error="
+                v$.currentCustomer.shipping.phone.$error &&
+                v$.currentCustomer.shipping.phone.$errors[0].$message
+              "
                 class="text-left"
               >
                 <BaseInput
@@ -538,6 +582,10 @@
               <BaseInputGroup
                 :label="$t('customers.zip_code')"
                 :content-loading="isFetchingInitialData"
+                :error="
+                v$.currentCustomer.shipping.zip.$error &&
+                v$.currentCustomer.shipping.zip.$errors[0].$message
+              "
                 class="mt-2 text-left"
               >
                 <BaseInput
@@ -594,6 +642,8 @@ import {
   email,
   sameAs,
   requiredIf,
+  alphaNum,
+  numeric
 } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
 import { useCustomerStore } from '@/scripts/admin/stores/customer'
@@ -607,6 +657,8 @@ const customerStore = useCustomerStore()
 const customFieldStore = useCustomFieldStore()
 const globalStore = useGlobalStore()
 const companyStore = useCompanyStore()
+const alpha = helpers.regex(/^[a-z A-Z]*$/)
+const zipCode = helpers.regex(/^[a-z A-Z 0-9]*$/)
 
 const customFieldValidationScope = 'customFields'
 
@@ -639,12 +691,20 @@ const rules = computed(() => {
           t('validation.name_min_length', { count: 3 }),
           minLength(3)
         ),
+        alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+      },
+      contact_name: {
+        alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+      },
+      phone:{
+        numeric: helpers.withMessage(t('validation.numbers_only'), numeric)
       },
       prefix: {
         minLength: helpers.withMessage(
           t('validation.name_min_length', { count: 3 }),
           minLength(3)
         ),
+        alphaNum : helpers.withMessage(t('validation.characters_only'), alphaNum)
       },
       currency_id: {
         required: helpers.withMessage(t('validation.required'), required),
@@ -681,6 +741,21 @@ const rules = computed(() => {
         url: helpers.withMessage(t('validation.invalid_url'), url),
       },
       billing: {
+        name: {
+          alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+        },
+        state: {
+          alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+        },
+        city: {
+          alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+        },
+        phone:{
+          numeric: helpers.withMessage(t('validation.numbers_only'), numeric)
+        },
+        zip: {
+          zipCode: helpers.withMessage(t('validation.characters_only'), zipCode)
+        },
         address_street_1: {
           maxLength: helpers.withMessage(
             t('validation.address_maxlength', { count: 255 }),
@@ -697,6 +772,18 @@ const rules = computed(() => {
       },
 
       shipping: {
+         name: {
+          alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+        },
+        state: {
+          alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+        },
+        city: {
+          alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+        },
+        phone:{
+          numeric: helpers.withMessage(t('validation.numbers_only'), numeric)
+        },
         address_street_1: {
           maxLength: helpers.withMessage(
             t('validation.address_maxlength', { count: 255 }),
@@ -709,6 +796,9 @@ const rules = computed(() => {
             t('validation.address_maxlength', { count: 255 }),
             maxLength(255)
           ),
+        },
+         zip: {
+          zipCode: helpers.withMessage(t('validation.characters_only'), zipCode)
         },
       },
     },

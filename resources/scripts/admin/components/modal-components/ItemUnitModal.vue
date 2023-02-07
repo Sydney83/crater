@@ -81,7 +81,7 @@ import { useI18n } from 'vue-i18n'
 
 const itemStore = useItemStore()
 const modalStore = useModalStore()
-
+const alpha = helpers.regex(/^[a-z A-Z]*$/)
 const { t } = useI18n()
 let isSaving = ref(false)
 
@@ -93,6 +93,7 @@ const rules = computed(() => {
         t('validation.name_min_length', { count: 3 }),
         minLength(3)
       ),
+      alpha: helpers.withMessage(t('validation.characters_only'), alpha),
     },
   }
 })

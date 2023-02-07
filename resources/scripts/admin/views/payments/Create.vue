@@ -297,6 +297,7 @@ const companyStore = useCompanyStore()
 const modalStore = useModalStore()
 const invoiceStore = useInvoiceStore()
 const globalStore = useGlobalStore()
+const alpha = helpers.regex(/^[a-z A-Z]*$/)
 
 const utils = inject('utils')
 const { t } = useI18n()

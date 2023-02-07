@@ -117,6 +117,7 @@ const noteStore = useNotesStore()
 const invoiceStore = useInvoiceStore()
 const paymentStore = usePaymentStore()
 const estimateStore = useEstimateStore()
+const alpha = helpers.regex(/^[a-z A-Z]*$/)
 
 const route = useRoute()
 const { t } = useI18n()
@@ -138,6 +139,7 @@ const rules = computed(() => {
           t('validation.name_min_length', { count: 3 }),
           minLength(3)
         ),
+        alpha:  helpers.withMessage(t('validation.characters_only'), alpha)
       },
       notes: {
         required: helpers.withMessage(t('validation.required'), required),
