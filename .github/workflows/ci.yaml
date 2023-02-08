@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - bahmni-master
+      - BAH-2563
     tags:
       - "*"
   pull_request:
@@ -39,6 +40,11 @@ jobs:
       run: composer update --ignore-platform-req=php --no-interaction --no-progress
       if: "matrix.php >= 8"
 
+    - name: Yarn install
+      run: yarn
+
+    - name: Yarn build
+      run: yarn build
 #     - name: Check coding style
 #       run: ./vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --config=.php-cs-fixer.dist.php
 
