@@ -161,7 +161,7 @@ const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
-const alpha = helpers.regex(/^[a-z A-Z]*$/)
+const alpha = helpers.regex(/^[a-z A-Z0-9(/)-.,]*$/)
 
 const isSaving = ref(false)
 const taxPerItem = ref(companyStore.selectedCompanySettings.tax_per_item)

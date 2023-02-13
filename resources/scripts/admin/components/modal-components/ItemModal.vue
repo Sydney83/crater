@@ -145,7 +145,7 @@ const companyStore = useCompanyStore()
 const taxTypeStore = useTaxTypeStore()
 const estimateStore = useEstimateStore()
 const notificationStore = useNotificationStore()
-const alpha = helpers.regex(/^[a-z A-Z]*$/)
+const alpha = helpers.regex(/^[a-z A-Z0-9(/)-.,]*$/)
 
 const { t } = useI18n()
 const isLoading = ref(false)
