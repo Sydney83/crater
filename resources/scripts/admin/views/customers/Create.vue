@@ -642,7 +642,6 @@ import {
   email,
   sameAs,
   requiredIf,
-  alphaNum,
   numeric
 } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
@@ -659,6 +658,8 @@ const globalStore = useGlobalStore()
 const companyStore = useCompanyStore()
 const alpha = helpers.regex(/^[a-z A-Z]*$/)
 const zipCode = helpers.regex(/^[a-z A-Z 0-9]*$/)
+const alphaNum = helpers.regex(/^[a-z A-Z0-9]*$/)
+const prefix = helpers.regex(/^[a-z A-Z0-9./]*$/)
 
 const customFieldValidationScope = 'customFields'
 
@@ -694,7 +695,7 @@ const rules = computed(() => {
         alpha: helpers.withMessage(t('validation.characters_only'), alpha)
       },
       contact_name: {
-        alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+        alphaNum: helpers.withMessage(t('validation.characters_only'), alphaNum)
       },
       phone:{
         numeric: helpers.withMessage(t('validation.numbers_only'), numeric)
@@ -704,7 +705,7 @@ const rules = computed(() => {
           t('validation.name_min_length', { count: 3 }),
           minLength(3)
         ),
-        alphaNum : helpers.withMessage(t('validation.characters_only'), alphaNum)
+        prefix : helpers.withMessage(t('validation.characters_only'), prefix)
       },
       currency_id: {
         required: helpers.withMessage(t('validation.required'), required),

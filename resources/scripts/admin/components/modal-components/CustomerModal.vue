@@ -504,7 +504,6 @@ import {
   helpers,
   requiredIf,
   sameAs,
-  alphaNum,
   numeric
 } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
@@ -529,6 +528,8 @@ const invoiceStore = useInvoiceStore()
 const notificationStore = useNotificationStore()
 const alpha = helpers.regex(/^[a-z A-Z]*$/)
 const zipCode = helpers.regex(/^[a-z A-Z 0-9]*$/)
+const alphaNum = helpers.regex(/^[a-z A-Z0-9]*$/)
+const prefix = helpers.regex(/^[a-z A-Z0-9./]*$/)
 
 let isFetchingInitialData = ref(false)
 
@@ -554,7 +555,7 @@ const rules = computed(() => {
        alpha: helpers.withMessage(t('validation.characters_only'), alpha)
       },
     contact_name: {
-      alpha: helpers.withMessage(t('validation.characters_only'), alpha)
+      alphaNum: helpers.withMessage(t('validation.characters_only'), alphaNum)
     },
     phone:{
       numeric: helpers.withMessage(t('validation.numbers_only'), numeric)
@@ -594,7 +595,7 @@ const rules = computed(() => {
         t('validation.name_min_length', { count: 3 }),
         minLength(3)
       ),
-    alphaNum : helpers.withMessage(t('validation.characters_only'), alphaNum)
+    prefix : helpers.withMessage(t('validation.characters_only'), prefix)
     },
     website: {
       url: helpers.withMessage(t('validation.invalid_url'), url),
