@@ -20,6 +20,9 @@ return [
             "name" => "view customer",
             "ability" => "view-customer",
             "model" => Customer::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create customer",
@@ -28,6 +31,7 @@ return [
             "depends_on" => [
                 'view-customer',
                 'view-custom-field',
+                'dashboard'
             ]
         ],
         [
@@ -37,6 +41,7 @@ return [
             "depends_on" => [
                 'view-customer',
                 'view-custom-field',
+                'dashboard'
             ]
         ],
         [
@@ -45,6 +50,7 @@ return [
             "model" => Customer::class,
             "depends_on" => [
                 'view-customer',
+                'dashboard'
             ]
         ],
 
@@ -53,6 +59,9 @@ return [
             "name" => "view item",
             "ability" => "view-item",
             "model" => Item::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create item",
@@ -60,7 +69,8 @@ return [
             "model" => Item::class,
             "depends_on" => [
                 'view-item',
-                'view-tax-type'
+                'view-tax-type',
+                'dashboard'
             ]
         ],
         [
@@ -69,6 +79,7 @@ return [
             "model" => Item::class,
             "depends_on" => [
                 'view-item',
+                'dashboard'
             ]
         ],
         [
@@ -77,6 +88,7 @@ return [
             "model" => Item::class,
             "depends_on" => [
                 'view-item',
+                'dashboard'
             ]
         ],
 
@@ -85,6 +97,9 @@ return [
             "name" => "view tax type",
             "ability" => "view-tax-type",
             "model" => TaxType::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create tax type",
@@ -92,6 +107,7 @@ return [
             "model" => TaxType::class,
             "depends_on" => [
                 'view-tax-type',
+                'dashboard'
             ]
         ],
         [
@@ -100,6 +116,7 @@ return [
             "model" => TaxType::class,
             "depends_on" => [
                 'view-tax-type',
+                'dashboard'
             ]
         ],
         [
@@ -108,6 +125,7 @@ return [
             "model" => TaxType::class,
             "depends_on" => [
                 'view-tax-type',
+                'dashboard'
             ]
         ],
 
@@ -116,6 +134,9 @@ return [
             "name" => "view estimate",
             "ability" => "view-estimate",
             "model" => Estimate::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create estimate",
@@ -127,6 +148,7 @@ return [
                 'view-tax-type',
                 'view-customer',
                 'view-custom-field',
+                'dashboard',
                 'view-all-notes'
             ]
         ],
@@ -140,7 +162,8 @@ return [
                 'view-tax-type',
                 'view-customer',
                 'view-custom-field',
-                'view-all-notes'
+                'view-all-notes',
+                'dashboard'
             ]
         ],
         [
@@ -149,12 +172,16 @@ return [
             "model" => Estimate::class,
             "depends_on" => [
                 'view-estimate',
+                'dashboard'
             ]
         ],
         [
             "name" => "send estimate",
             "ability" => "send-estimate",
             "model" => Estimate::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
 
         // Invoice
@@ -162,6 +189,9 @@ return [
             "name" => "view invoice",
             "ability" => "view-invoice",
             "model" => Invoice::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create invoice",
@@ -174,7 +204,8 @@ return [
                 'view-tax-type',
                 'view-customer',
                 'view-custom-field',
-                'view-all-notes'
+                'view-all-notes',
+                'dashboard'
             ]
         ],
         [
@@ -187,7 +218,8 @@ return [
                 'view-tax-type',
                 'view-customer',
                 'view-custom-field',
-                'view-all-notes'
+                'view-all-notes',
+                'dashboard'
             ]
         ],
         [
@@ -195,13 +227,17 @@ return [
             "ability" => "delete-invoice",
             "model" => Invoice::class,
             "depends_on" => [
-                'view-invoice'
+                'view-invoice',
+                'dashboard'
             ]
         ],
         [
             "name" => "send invoice",
             "ability" => "send-invoice",
             "model" => Invoice::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
 
         // Recurring Invoice
@@ -209,6 +245,9 @@ return [
             "name" => "view recurring invoice",
             "ability" => "view-recurring-invoice",
             "model" => RecurringInvoice::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create recurring invoice",
@@ -220,7 +259,8 @@ return [
                 'view-tax-type',
                 'view-customer',
                 'view-all-notes',
-                'send-invoice'
+                'send-invoice',
+                'dashboard'
             ]
         ],
         [
@@ -233,7 +273,8 @@ return [
                 'view-tax-type',
                 'view-customer',
                 'view-all-notes',
-                'send-invoice'
+                'send-invoice',
+                'dashboard'
             ]
         ],
         [
@@ -242,6 +283,7 @@ return [
             "model" => RecurringInvoice::class,
             "depends_on" => [
                 'view-recurring-invoice',
+                'dashboard'
             ]
         ],
 
@@ -250,6 +292,9 @@ return [
             "name" => "view payment",
             "ability" => "view-payment",
             "model" => Payment::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create payment",
@@ -260,7 +305,8 @@ return [
                 'view-payment',
                 'view-invoice',
                 'view-custom-field',
-                'view-all-notes'
+                'view-all-notes',
+                'dashboard'
             ]
         ],
         [
@@ -272,7 +318,8 @@ return [
                 'view-payment',
                 'view-invoice',
                 'view-custom-field',
-                'view-all-notes'
+                'view-all-notes',
+                'dashboard'
             ]
         ],
         [
@@ -281,12 +328,16 @@ return [
             "model" => Payment::class,
             "depends_on" => [
                 'view-payment',
+                'dashboard'
             ]
         ],
         [
             "name" => "send payment",
             "ability" => "send-payment",
             "model" => Payment::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
 
         // Expense
@@ -294,6 +345,9 @@ return [
             "name" => "view expense",
             "ability" => "view-expense",
             "model" => Expense::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create expense",
@@ -303,6 +357,7 @@ return [
                 'view-customer',
                 'view-expense',
                 'view-custom-field',
+                'dashboard'
             ]
         ],
         [
@@ -313,6 +368,7 @@ return [
                 'view-customer',
                 'view-expense',
                 'view-custom-field',
+                'dashboard'
             ]
         ],
         [
@@ -321,6 +377,7 @@ return [
             "model" => Expense::class,
             "depends_on" => [
                 'view-expense',
+                'dashboard'
             ]
         ],
 
@@ -329,6 +386,9 @@ return [
             "name" => "view custom field",
             "ability" => "view-custom-field",
             "model" => CustomField::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create custom field",
@@ -336,6 +396,7 @@ return [
             "model" => CustomField::class,
             "depends_on" => [
                 'view-custom-field',
+                'dashboard'
             ]
         ],
         [
@@ -344,6 +405,7 @@ return [
             "model" => CustomField::class,
             "depends_on" => [
                 'view-custom-field',
+                'dashboard'
             ]
         ],
         [
@@ -352,6 +414,7 @@ return [
             "model" => CustomField::class,
             "depends_on" => [
                 'view-custom-field',
+                'dashboard'
             ]
         ],
 
@@ -360,6 +423,9 @@ return [
             "name" => "view financial reports",
             "ability" => "view-financial-reports",
             "model" => null,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
 
         // Exchange Rate Provider
@@ -368,6 +434,9 @@ return [
             "ability" => "view-exchange-rate-provider",
             "model" => ExchangeRateProvider::class,
             'owner_only' => false,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "create exchange rate provider",
@@ -376,6 +445,7 @@ return [
             'owner_only' => false,
             "depends_on" => [
                 'view-exchange-rate-provider',
+                'dashboard'
             ]
         ],
         [
@@ -385,6 +455,7 @@ return [
             'owner_only' => false,
             "depends_on" => [
                 'view-exchange-rate-provider',
+                'dashboard'
             ]
         ],
         [
@@ -394,6 +465,7 @@ return [
             'owner_only' => false,
             "depends_on" => [
                 'view-exchange-rate-provider',
+                'dashboard'
             ]
         ],
 
@@ -402,18 +474,25 @@ return [
             "name" => "view company dashboard",
             "ability" => "dashboard",
             "model" => null,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "view all notes",
             "ability" => "view-all-notes",
             "model" => Note::class,
+            "depends_on" => [
+                'dashboard'
+            ]
         ],
         [
             "name" => "manage notes",
             "ability" => "manage-all-notes",
             "model" => Note::class,
             "depends_on" => [
-                'view-all-notes'
+                'view-all-notes',
+                'dashboard'
             ]
         ]
     ]
