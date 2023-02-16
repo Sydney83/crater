@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - bahmni-master
+      - session_time
     tags:
       - "*"
   pull_request:
@@ -86,7 +87,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: crater-artifact
-        path: public/build/    
+        path: public/build/
 
     - name: Login to DockerHub
       uses: docker/login-action@v1
