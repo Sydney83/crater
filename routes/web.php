@@ -128,7 +128,7 @@ Route::get('/installation', function () {
 
 Route::get('/admin/{vue?}', function () {
     return view('app');
-})->where('vue', '[\/\w\.-]*')->name('admin.dashboard')->middleware(['install', 'redirect-if-unauthenticated']);
+})->where('vue', '[\/\w\.-]*')->name('admin.dashboard')->middleware(['auth:sanctum', 'install', 'redirect-if-unauthenticated']);
 
 Route::get('{company:slug}/customer/{vue?}', function (Company $company) {
     return view('app')->with([
