@@ -1,6 +1,6 @@
 <?php
 
-return [
+return array(
 
     /*
     |--------------------------------------------------------------------------
@@ -12,8 +12,15 @@ return [
     |
     */
     'show_warnings' => false,   // Throw an Exception on warnings from dompdf
-    'orientation' => 'portrait',
-    'defines' => [
+
+    'public_path' => null,  // Override the public path if needed
+
+    /*
+     * Dejavu Sans font is missing glyphs for converted entities, turn it off if you need to show € and £.
+     */
+    'convert_entities' => true,
+
+    'options' => array(
         /**
          * The location of the DOMPDF font directory
          *
@@ -38,7 +45,7 @@ return [
          * Times-Roman, Times-Bold, Times-BoldItalic, Times-Italic,
          * Symbol, ZapfDingbats.
          */
-        "font_dir" => storage_path('fonts/'), // advised by dompdf (https://github.com/dompdf/dompdf/pull/782)
+        "font_dir" => storage_path('fonts'), // advised by dompdf (https://github.com/dompdf/dompdf/pull/782)
 
         /**
          * The location of the DOMPDF font cache directory
@@ -48,7 +55,7 @@ return [
          *
          * Note: This directory must exist and be writable by the webserver process.
          */
-        "font_cache" => storage_path('fonts/'),
+        "font_cache" => storage_path('fonts'),
 
         /**
          * The location of a temporary directory.
@@ -69,9 +76,30 @@ return [
          * should be an absolute path.
          * This is only checked on command line call by dompdf.php, but not by
          * direct class use like:
-         * $dompdf = new DOMPDF();	$dompdf->load_html($htmldata); $dompdf->render(); $pdfdata = $dompdf->output();
+         * $dompdf = new DOMPDF();  $dompdf->load_html($htmldata); $dompdf->render(); $pdfdata = $dompdf->output();
          */
         "chroot" => realpath(base_path()),
+
+        /**
+         * Protocol whitelist
+         *
+         * Protocols and PHP wrappers allowed in URIs, and the validation rules
+         * that determine if a resouce may be loaded. Full support is not guaranteed
+         * for the protocols/wrappers specified
+         * by this array.
+         *
+         * @var array
+         */
+        'allowed_protocols' => [
+            "file://" => ["rules" => []],
+            "http://" => ["rules" => []],
+            "https://" => ["rules" => []]
+        ],
+
+         /**
+          * @var string
+          */
+        'log_output_file' => null,
 
         /**
          * Whether to enable font subsetting or not.
@@ -117,7 +145,7 @@ return [
          *
          * @link http://www.pdflib.com
          *
-         * If pdflib present in web server and auto or selected explicitly above,
+         * If pdflib present in web server and auto or selected explicitely above,
          * a real license code must exist!
          */
         //"DOMPDF_PDFLIB_LICENSE" => "your license key here",
@@ -143,19 +171,28 @@ return [
          */
         "default_paper_size" => "a4",
 
+         /**
+          * The default paper orientation.
+          *
+          * The orientation of the page (portrait or landscape).
+          *
+          * @var string
+          */
+        'default_paper_orientation' => "portrait",
+
         /**
          * The default font family
          *
          * Used if no suitable fonts can be found. This must exist in the font folder.
          * @var string
          */
-        "default_font" => "DejaVu Sans",
+        "default_font" => "serif",
 
         /**
          * Image DPI setting
          *
          * This setting determines the default DPI setting for images and fonts.  The
-         * DPI may be overridden for inline images by explicitly setting the
+         * DPI may be overridden for inline images by explictly setting the
          * image's width & height style attributes (i.e. if the image's native
          * width is 600 pixels and you specify the image's width as 72 points,
          * the image will have a DPI of 600 in the rendered PDF.  The DPI of
@@ -235,10 +272,13 @@ return [
         "font_height_ratio" => 1.1,
 
         /**
-         * Use the more-than-experimental HTML5 Lib parser
+         * Use the HTML5 Lib parser
+         *
+         * @deprecated This feature is now always on in dompdf 2.x
+         * @var bool
          */
         "enable_html5_parser" => true,
-    ],
+    ),
 
 
-];
+);
