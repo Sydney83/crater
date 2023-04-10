@@ -70,12 +70,12 @@ jobs:
       HELM_CHART_PATH: package/helm/crater
     steps:
     - name: check if prod release
-      if: startsWith(github.ref, 'refs/tags/v')
+      if: startsWith(github.ref, 'refs/tags/bahmni')
       run: |
         echo "VERSION_TAG=${{ env.CRATER_VERSION }}"
         echo "VERSION_TAG=${{ env.CRATER_VERSION }}" >> $GITHUB_ENV
     - name: check if dev release
-      if: startsWith(github.ref, 'refs/tags/v') != true
+      if: startsWith(github.ref, 'refs/tags/bahmni-') != true
       run: |
         echo "VERSION_TAG=${{ env.CRATER_VERSION }}-${{ github.run_number }}"
         echo "VERSION_TAG=${{ env.CRATER_VERSION }}-${{ github.run_number }}" >> $GITHUB_ENV
@@ -116,12 +116,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check if prod release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/bahmni-')
         run: |
           echo "VERSION_TAG=${{ env.CRATER_VERSION }}"
           echo "VERSION_TAG=${{ env.CRATER_VERSION }}" >> $GITHUB_ENV
       - name: check if dev release
-        if: startsWith(github.ref, 'refs/tags/v') != true
+        if: startsWith(github.ref, 'refs/tags/bahmni-') != true
         run: |
           echo "VERSION_TAG=${{ env.CRATER_VERSION }}-${{ github.run_number }}"
           echo "VERSION_TAG=${{ env.CRATER_VERSION }}-${{ github.run_number }}" >> $GITHUB_ENV
