@@ -101,7 +101,7 @@ jobs:
         push: true
         # :product is just a temp tag - eventually the crater-image would come from the craterapp dockerhub repo
         # PR https://github.com/crater-invoice/crater/pull/922
-        tags: bahmni/crater-php:product
+        tags: bahmni/crater-php:product,bahmni/crater-php:product-${{env.VERSION_TAG}}
     - name: Docker Build and push crater-nginx
       uses: docker/build-push-action@v2
       with:
