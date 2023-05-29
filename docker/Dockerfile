@@ -16,7 +16,8 @@ RUN apk update && apk add --no-cache --virtual \
     imagemagick \
     imagemagick-dev \
     mariadb-client \
-    gettext
+    gettext \
+    tzdata
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
