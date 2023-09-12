@@ -1,4 +1,4 @@
-FROM nginx:1.23.3-alpine
+FROM nginx:1.25.2-alpine
 
 RUN apk update && apk add openssl
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/cert-key.key -out /etc/ssl/certs/cert.crt -subj "/C=IN/ST=Tamil Nadu/L=Coibmatore/O=Thoughtworks/CN=localhost"
