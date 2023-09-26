@@ -1,12 +1,12 @@
-FROM php:8.2-fpm-alpine3.17
+FROM php:8.1.23-fpm-alpine
 
 ENV user=crater-user
 ENV uid=1000
 
 # Install system dependencies
 RUN apk update && apk add --no-cache --virtual \
-    git \
-    curl \
+    git=2.39.1-r0 \
+    curl=8.3.0-r0 \
     libpng-dev \
     oniguruma-dev \
     libxml2-dev \
@@ -49,7 +49,6 @@ COPY docker/start.sh start.sh
 RUN chmod +x start.sh
 RUN chmod +x wait-for.sh
 RUN rm -rf /tmp/artifacts
-RUN apk del --no-cache git
 
 USER $user
 
