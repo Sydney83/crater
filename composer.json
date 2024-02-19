@@ -17,6 +17,7 @@
     "fideloper/proxy": "^4.0",
     "fruitcake/laravel-cors": "^1.0",
     "guzzlehttp/guzzle": "^7.5.0",
+    "guzzlehttp/psr7": "2.4.5",
     "innocenzi/laravel-vite": "^0.1.1",
     "intervention/image": "^2.3",
     "jasonmccreary/laravel-test-assertions": "^2.0",
@@ -90,5 +91,8 @@
     "laravel": {
       "dont-discover": []
     }
+  },
+  "conflict": {
+    "symfony/console": "5.4.35"
   }
 }
