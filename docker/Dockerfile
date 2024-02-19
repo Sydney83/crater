@@ -1,12 +1,15 @@
-FROM php:8.1.23-fpm-alpine
+FROM php:8.2-fpm-alpine
 
 ENV user=crater-user
 ENV uid=1000
 
+# Install apk package manager
+RUN apk update && apk add --no-cache apk-tools
+
 # Install system dependencies
 RUN apk update && apk add --no-cache --virtual \
     git=2.39.1-r0 \
-    curl=8.3.0-r0 \
+    curl=8.5.0-r0 \
     libpng-dev \
     oniguruma-dev \
     libxml2-dev \
@@ -26,11 +29,12 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN adduser -D -h /home/$user $user
-RUN addgroup $user www-data
-RUN addgroup $user root
+RUN adduser -D -u $uid -g '' $user \
+    && addgroup $user www-data \
+    && addgroup $user root
 
-RUN mkdir -p /home/$user/.composer 
+
+RUN mkdir -p /home/$user/.composer
 RUN chown -R $user:$user /home/$user
 
 COPY . /var/www/

@@ -41,12 +41,20 @@ class BootstrapController extends Controller
             $current_company = $current_user->companies()->first();
         }
 
-        $current_company_settings = CompanySetting::getAllSettings($current_company->id);
-
-        $current_company_currency = $current_company_settings->has('currency')
-            ? Currency::find($current_company_settings->get('currency'))
-            : Currency::first();
-
+         $current_company_settings = CompanySetting::getAllSettings($current_company->id);
+         // Check if currency is defined in the .env file
+         if (env('CRATER_DEFAULT_CURRENCY')) {
+             $current_company_currency = Currency::where('code', env('CRATER_DEFAULT_CURRENCY'))->first();
+             $current_company_settings->put('currency', $current_company_currency->id);
+        }
+         if (!$current_company_currency) {
+             $currencyId = $current_company_settings->get('currency');
+             if ($currencyId) {
+                 $current_company_currency = Currency::find($currencyId);
+             } else {
+                 $current_company_currency = Currency::first();
+             }
+         }
         BouncerFacade::refreshFor($current_user);
 
         $global_settings = Setting::getSettings([
