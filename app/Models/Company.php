@@ -265,7 +265,15 @@ class Company extends Model implements HasMedia
     {
         $currencyCode = env('CRATER_DEFAULT_CURRENCY');
         $currency = Currency::where('code', $currencyCode)->first();
-        return $currency ? $currency->id : 13; // Default to 13 (INR)if currency not found
+         if ($currency) {
+               // Log the currency being set
+               \Log::info("Default currency sdadsdasdasd '{$currency->code}' (ID: {$currency->id}) is being set.");
+               return $currency->id;
+           } else {
+               // Log that the default currency was not found and defaulting to INR
+               \Log::info("Default currency '{$currencyCode}' not found. Defaulting to INR (ID: 13).");
+               return 13; // Default to 13 (INR) if currency not found
+           }
     }
     public function deleteCompany($user)
     {
