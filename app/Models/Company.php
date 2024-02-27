@@ -267,7 +267,7 @@ class Company extends Model implements HasMedia
         $currency = Currency::where('code', $currencyCode)->first();
          if ($currency) {
                // Log the currency being set
-               \Log::info("Default currency sdadsdasdasd '{$currency->code}' (ID: {$currency->id}) is being set.");
+               \Log::info("Default currency '{$currency->code}' (ID: {$currency->id}) is being set.");
                return $currency->id;
            } else {
                // Log that the default currency was not found and defaulting to INR
