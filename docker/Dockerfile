@@ -47,7 +47,6 @@ RUN chmod -R 775 /var/www/bootstrap
 WORKDIR /var/www
 
 RUN curl -o wait-for.sh 'https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for'
-RUN composer update
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 RUN composer require guzzlehttp/psr7:2.4.5
 COPY docker/start.sh start.sh
