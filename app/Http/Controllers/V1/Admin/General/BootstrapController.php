@@ -41,11 +41,11 @@ class BootstrapController extends Controller
             $current_company = $current_user->companies()->first();
         }
 
-        $current_company_settings = CompanySetting::getAllSettings($current_company->id);
+         $current_company_settings = CompanySetting::getAllSettings($current_company->id);
 
-        $current_company_currency = $current_company_settings->has('currency')
-            ? Currency::find($current_company_settings->get('currency'))
-            : Currency::first();
+                $current_company_currency = $current_company_settings->has('currency')
+                    ? Currency::find($current_company_settings->get('currency'))
+                    : Currency::first();
 
         BouncerFacade::refreshFor($current_user);
 

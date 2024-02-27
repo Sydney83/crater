@@ -217,7 +217,7 @@ class Company extends Model implements HasMedia
             'estimate_billing_address_format' => $billingAddressFormat,
             'payment_company_address_format' => $companyAddressFormat,
             'payment_from_customer_address_format' => $paymentFromCustomerAddress,
-            'currency' => request()->currency ?? 13,
+            'currency' => request()->currency ?? $this->getDefaultCurrencyId(),
             'time_zone' => 'Asia/Kolkata',
             'language' => 'en',
             'fiscal_year' => '1-12',
@@ -261,7 +261,20 @@ class Company extends Model implements HasMedia
 
         return true;
     }
-
+    protected function getDefaultCurrencyId()
+    {
+        $currencyCode = env('CRATER_DEFAULT_CURRENCY');
+        $currency = Currency::where('code', $currencyCode)->first();
+         if ($currency) {
+               // Log the currency being set
+               \Log::info("Default currency '{$currency->code}' (ID: {$currency->id}) is being set.");
+               return $currency->id;
+           } else {
+               // Log that the default currency was not found and defaulting to INR
+               \Log::info("Default currency '{$currencyCode}' not found. Defaulting to INR (ID: 13).");
+               return 13; // Default to 13 (INR) if currency not found
+           }
+    }
     public function deleteCompany($user)
     {
         if ($this->exchangeRateLogs()->exists()) {
