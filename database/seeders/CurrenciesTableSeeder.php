@@ -17,6 +17,14 @@ class CurrenciesTableSeeder extends Seeder
         if (empty(Currency::count())) {
             $currencies = [
                 [
+                    'name' => 'Malawi Kwacha',
+                    'code' => 'MWK',
+                    'symbol' => 'K',
+                    'precision' => '2',
+                    'thousand_separator' => ',',
+                    'decimal_separator' => '.',
+                ],
+                 [
                     'name' => 'US Dollar',
                     'code' => 'USD',
                     'symbol' => '$',
