@@ -32,6 +32,14 @@ class CurrenciesTableSeeder extends Seeder
                     'thousand_separator' => ',',
                     'decimal_separator' => '.',
                 ],
+                 [
+                    'name' => 'Malawi Kwacha',
+                    'code' => 'MWK',
+                    'symbol' => 'K',
+                    'precision' => '2',
+                    'thousand_separator' => ',',
+                    'decimal_separator' => '.',
+                ],
                 [
                     'name' => 'Euro',
                     'code' => 'EUR',
